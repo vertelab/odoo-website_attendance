@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Template rendering the external HTML support page -->
+        <template id="hello_world" name="Hello World">
+            &lt;!DOCTYPE html&gt;
+            <html style="height: 100%">
+                <head>
+                    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8" />-->
+                    <title>It's alive!</title>
+
+                    <!-- Call the external Bundle to render the css, js, and js loader tags -->
+
+<!--                    <style type="text/css">
+                        body {
+                            height: 100%;
+                            font-size: 16px;
+                            font-weight: 400;
+                            font-family: "Lato", "Lucida Grande", "Helvetica neue", "Helvetica", "Verdana", "Arial", sans-serif;
+                            overflow: hidden;
+                            overflow-y: auto;
+                            display: block;
+                            margin: 0;
+                            padding: 0;
+                            border: none;
+                            width: 100%;
+                            height: 100%;
+                            background: #C9C8E0;
+                            background-image: -webkit-linear-gradient(top, #7c7bad, #ddddee);
+                            background-image: -moz-linear-gradient(top, #7c7bad, #ddddee);
+                            background-image: -ms-linear-gradient(top, #7c7bad, #ddddee);
+                            background-image: -o-linear-gradient(top, #7c7bad, #ddddee);
+                            background-image: linear-gradient(to bottom, #7c7bad, #ddddee);
+                            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7c7bad', endColorstr='#ddddee',GradientType=0 );
+                            -webkit-background-size: cover;
+                            -moz-background-size: cover;
+                            -o-background-size: cover;
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                            background-attachment: fixed;
+                        }
+                        .main {
+                            position: absolute;
+                            opacity: 0;
+                            top: 50%;
+                            width: 100%;
+                            margin-top: -150px;
+                            color: white;
+                            text-shadow: 0 1px 0 rgba(34, 52, 72, 0.2);
+                            text-align: center;
+                        }
+                        .main h1 {
+                            font-size: 54px;
+                        }
+                        .main div {
+                            font-style: italic;
+                        }
+                    </style>-->
+                </head>
+
+                <body>
+                    <p t-if="signed_in">Last sign in <t t-esc="last"></t></p>
+                    <p t-if="signed_in==False">Last sign out <t t-esc="last"></t></p>
+                    <button type="button" onclick="window.location.href='/signin/click'"><p t-if="signed_in">Sign out</p><p t-if="signed_in==False">Sign in</p></button>
+                </body>
+            </html>
+        </template>
+    </data>
+</openerp>

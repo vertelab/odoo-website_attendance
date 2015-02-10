@@ -60,9 +60,39 @@
                 </head>
 
                 <body>
-                    <p t-if="signed_in">Last sign in <t t-esc="last"></t></p>
-                    <p t-if="signed_in==False">Last sign out <t t-esc="last"></t></p>
-                    <button type="button" onclick="window.location.href='/signin/click'"><p t-if="signed_in">Sign out</p><p t-if="signed_in==False">Sign in</p></button>
+                    
+                   
+                <t t-call="website.layout">
+                    <div id="wrap" class="oe_structure oe_empty"> 
+                        <section class="mb32 mt16">
+                            <div class="container">
+                                <div class="row">                 
+                                                
+                                    <section class="jumbotron">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8 text-muted">
+                                                    <p class="mb0">
+                                                        <strong>Click to sign in and out</strong>
+                                                    </p>
+                                                    <p t-if="signed_in">Last sign in <t t-esc="last"></t></p>
+                                                    <p t-if="signed_in==False">Last sign out <t t-esc="last"></t></p>
+                                                </div>
+                                                <div>
+                                                    <a class="btn btn-primary btn-lg pull-center mt8" href="/signin/click">
+                                                        <t t-if="signed_in">Sign out</t>
+                                                        <t t-if="signed_in==False">Sign in</t> 
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </t>
+                
                 </body>
             </html>
         </template>

@@ -60,8 +60,7 @@
                 </head>
 
                 <body>
-                    
-                   
+
                 <t t-call="website.layout">
                     <div id="wrap" class="oe_structure oe_empty"> 
                         <section class="mb32 mt16">
@@ -79,7 +78,7 @@
                                                     <p t-if="signed_in==False">Last sign out <t t-esc="last"></t></p>
                                                 </div>
                                                 <div>
-                                                    <a class="btn btn-primary btn-lg pull-center mt8" href="/signin/click">
+                                                    <a class="btn btn-primary btn-lg pull-center mt8" t-att-href="'/signin/%s/click' %user.id">
                                                         <t t-if="signed_in">Sign out</t>
                                                         <t t-if="signed_in==False">Sign in</t> 
                                                     </a>

@@ -24,14 +24,14 @@ from openerp import http
 from openerp.http import request
 
 class website_hello_world(http.Controller):
-    @http.route(['/signin/<string:clicked>', '/signin'], type='http', auth="user", website=True)
-    def hello(self, clicked=False):
+    @http.route(['/signin/<model("res.users"):user>', '/signin/<model("res.users"):user>/<string:clicked>'], type='http', auth="user", website=True)
+    def hello(self, user=False, clicked=False):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
         if clicked:
-            pool.get('hr.employee').attendance_action_change(cr, uid, uid, context)
-        employee = pool.get('hr.employee').browse(cr, uid, uid, context)
+            user.employee_ids[0].attendance_action_change()
         ctx = {
-            'signed_in': employee.state == 'present',
-            'last': employee.last_sign                  #TODO: justera tiden till rätt tidszon
+            'user' : user,
+            'signed_in': user.employee_ids[0].state == 'present',
+            'last': user.employee_ids[0].last_sign ,             #TODO: justera tiden till rätt tidszon
             }
         return request.render('website_attendance.hello_world', ctx)

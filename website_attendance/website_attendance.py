@@ -37,4 +37,34 @@ class website_hello_world(http.Controller):
             'signed_in': user.employee_ids[0].state == 'present',
             'last': user.employee_ids[0].last_sign ,             #TODO: justera tiden till rätt tidszon
             }
+    
+
         return request.render('website_attendance.hello_world', ctx)
+        
+class hr_employee(models.Model):
+    _inherit = ['hr.employee']
+    
+    @api.multi
+    def send_email(self):
+        assert len(self) == 1, 'This option should only be used for a single id at a time.'
+        template = self.env.ref('website_attendance.email_template_website_att', False)
+        compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
+        ctx = dict(
+            default_model='hr.employee',
+            default_res_id=self.id,
+            default_use_template=bool(template),
+            default_template_id=template.id,
+            default_composition_mode='comment',
+            #mark_invoice_as_sent=True,
+        )
+        return {
+            'name': _('Compose Email'),
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(compose_form.id, 'form')],
+            'view_id': compose_form.id,
+            'target': 'new',
+            'context': ctx,
+        }

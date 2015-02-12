@@ -22,11 +22,14 @@ from openerp import models, fields, api, _
 from openerp.exceptions import except_orm, Warning, RedirectWarning
 from openerp import http
 from openerp.http import request
+import werkzeug
 
 class website_hello_world(http.Controller):
-    @http.route(['/signin/<model("res.users"):user>', '/signin/<model("res.users"):user>/<string:clicked>'], type='http', auth="user", website=True)
+    @http.route(['/signin/<model("res.users"):user>', '/signin/<model("res.users"):user>/<string:clicked>', '/signin'], type='http', auth="user", website=True)
     def hello(self, user=False, clicked=False):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
+        if not user:
+            return werkzeug.utils.redirect("/signin/%s" %uid,302)
         if clicked:
             user.employee_ids[0].attendance_action_change()
         ctx = {

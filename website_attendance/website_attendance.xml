@@ -18,14 +18,14 @@
                 <field name="name">Email Template Sign In</field>
                 <field name="email_from">${object.name or ''}</field>
                 <field name="subject"> ${'Link for check in'}</field>
-                <field name="model_id" ref="hr.employee"/>
+                <field name="model_id" ref="website_attendance.model_hr_employee"/>
                 <field name="auto_delete" eval="True"/>
-                <field name="email_to">${object.name or ''}</field>
+                <field name="email_to">${object.user_id.email or ''}</field>
                 <field name="body_html">        
                       <![CDATA[
                     <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 16px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">
-                    <p style="color:black"><font-size="12">To sign in go to: 
-                    http://lia.azzar.pl/signin/</font></p>
+                    <p style="color:black"><font-size="12">To sign in go to: </font></p>
+                    ${object.get_url()}/signin
                     </div>
                     ]]>
                 </field>
@@ -36,9 +36,29 @@
             &lt;!DOCTYPE html&gt;
             <html style="height: 100%">
                 <head>
+                    <!--FOR APPLE-->
+                    <meta name="apple-mobile-web-app-capable" content="yes"/>
+                    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+                    <link rel="apple-touch-startup-image" href="/website_attendance/static/description/apple-touch-icon-152x152-precomposed.png"/>
+                    <link rel="apple-touch-icon" href="/website_attendance/static/description/apple-touch-icon-152x152-precomposed.png"/>
+                    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/website_attendance/static/description/apple-touch-icon-152x152-precomposed.png"/>
+
+                    <!-- WEBPAGE ICON -->
+                    <!--from http://www.faviconer.com/icon/index
+                        http://stackoverflow.com/questions/4888377/how-to-add-a-browser-tab-icon-for-a-website
+                    -->
+                    <link rel="shortcut icon" href="/website_attendance/static/description/apple-touch-icon-152x152-precomposed.png"  type="image/x-icon" /> 
+                    <link rel="icon" href="/website_attendance/static/description/apple-touch-icon-152x152-precomposed.png" type="image/x-icon"/>
+
+                    <!--FOR ANDROID-->
+                    <meta name="mobile-web-app-capable" content="yes"/>
+                    <link rel="shortcut icon" sizes="196x196" href="/website_attendance/static/description/apple-touch-icon-152x152-precomposed.png"/>
+                    <link rel="shortcut icon" sizes="128x128" href="/website_attendance/static/description/apple-touch-icon-152x152-precomposed.png"/>
+                    
+                    
                     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
                     <meta http-equiv="content-type" content="text/html; charset=utf-8" />-->
-                    <title>It's alive!</title>
+                    <title>Sign in</title>
 
                     <!-- Call the external Bundle to render the css, js, and js loader tags -->
 
@@ -123,6 +143,8 @@
                 </t>
                 
                 </body>
+                
+                
             </html>
         </template>
     </data>

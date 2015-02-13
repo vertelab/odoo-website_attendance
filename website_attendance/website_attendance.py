@@ -22,6 +22,7 @@ from openerp import models, fields, api, _
 from openerp.exceptions import except_orm, Warning, RedirectWarning
 from openerp import http
 from openerp.http import request
+from openerp import SUPERUSER_ID
 import werkzeug
 
 class website_hello_world(http.Controller):
@@ -43,6 +44,9 @@ class website_hello_world(http.Controller):
         
 class hr_employee(models.Model):
     _inherit = ['hr.employee']
+    
+    def get_url(self):
+        return self.pool['ir.config_parameter'].get_param(self.env.cr, SUPERUSER_ID, 'web.base.url')
     
     @api.multi
     def send_email(self):

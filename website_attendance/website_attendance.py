@@ -48,6 +48,8 @@ class hr_employee(models.Model):
     def get_url(self):
         return self.pool['ir.config_parameter'].get_param(self.env.cr, SUPERUSER_ID, 'web.base.url')
     
+    
+    
     @api.multi
     def send_email(self):
         assert len(self) == 1, 'This option should only be used for a single id at a time.'

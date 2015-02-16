@@ -29,7 +29,7 @@ Sign in and out through mobile.
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
-    'depends': ['base','mail'],
+    'depends': ['base','mail', 'website', 'hr_attendance'],
     'data': ['website_attendance.xml',
     ],
 

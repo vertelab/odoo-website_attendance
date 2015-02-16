@@ -29,7 +29,39 @@
                     </div>
                     ]]>
                 </field>
-            </record>  
+            </record>
+            
+            <template id="layout" inherit_id="website.layout">
+            <xpath expr="//footer" position="replace">
+<!--                <div id="footer">
+                </div>
+                   <section data-snippet-id='three-columns'>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4 class="mt16">Subtitle</h4>
+                                    <p>
+                                        <a href="/">Homepage</a>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 class="mt16">Subtitle 2</h4>
+                                    <p>
+                                        ...
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 class="mt16">Subtitle 3</h4>
+                                    <p>
+                                        ...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+-->            </xpath>
+        </template>
         
         <!-- Template rendering the external HTML support page -->
         <template id="hello_world" name="Hello World">
@@ -144,8 +176,18 @@
                 
                 </body>
                 
+<!--
+                <footer>
+                    <p>Posted by: Hege Refsnes</p>
+                    <p>Contact information: <a href="mailto:someone@example.com">
+                        someone@example.com</a>.</p>
+                </footer>
+-->
+                
                 
             </html>
         </template>
+        
+
     </data>
 </openerp>

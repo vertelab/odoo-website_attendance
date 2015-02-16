@@ -23,9 +23,12 @@ from openerp.exceptions import except_orm, Warning, RedirectWarning
 from openerp import http
 from openerp.http import request
 from openerp import SUPERUSER_ID
+from datetime import datetime
 import werkzeug
+import pytz
 
 class website_hello_world(http.Controller):
+        
     @http.route(['/signin/<model("res.users"):user>', '/signin/<model("res.users"):user>/<string:clicked>', '/signin'], type='http', auth="user", website=True)
     def hello(self, user=False, clicked=False):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
@@ -33,10 +36,18 @@ class website_hello_world(http.Controller):
             return werkzeug.utils.redirect("/signin/%s" %uid,302)
         if clicked:
             user.employee_ids[0].attendance_action_change()
+        last=user.employee_ids[0].last_sign
+         # get user's timezone
+        #user_pool = self.pool.get('res.users')
+        #user = user_pool.browse(cr, SUPERUSER_ID, uid)
+        tz = pytz.timezone(user.partner_id.tz) or pytz.utc
+        
+        last = pytz.utc.localize(datetime.strptime(last, '%Y-%m-%d %H:%M:%S')).astimezone(tz).replace(tzinfo=None)
+    
         ctx = {
             'user' : user,
             'signed_in': user.employee_ids[0].state == 'present',
-            'last': user.employee_ids[0].last_sign ,             #TODO: justera tiden till rätt tidszon
+            'last': last,             #TODO: justera tiden till rätt tidszon
             }
     
 

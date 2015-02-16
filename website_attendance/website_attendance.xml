@@ -24,7 +24,7 @@
                 <field name="body_html">        
                       <![CDATA[
                     <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 16px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">
-                    <p style="color:black"><font-size="12">To sign in go to: </font></p>
+                    <p style="color:black"><font-size="12">To sign in follow the link below: </font></p>
                     ${object.get_url()}/signin
                     </div>
                     ]]>
@@ -145,12 +145,37 @@
 
                 <t t-call="website.layout">
                     <div id="wrap" class="oe_structure oe_empty"> 
+
                         <section class="mb32 mt16">
                             <div class="container">
-                                <div class="row">                 
+     <!--                         <div class="row">                 
+
                                                 
-                                    <section class="jumbotron">
-                                        <div class="container">
+                                      <section class="jumbotron">-->
+                                    
+                                    <section class="oe_container oe_dark">
+                                        <div class="oe_row">           
+                                        <div align="center">
+                                            <br></br>
+                                            <h2 align="center">Click to sign in and out</h2>
+                                           
+                                            <p align="center">
+                                                <p t-if="signed_in">Last sign in <t t-esc="last"></t></p>
+                                                <p t-if="signed_in==False">Last sign out <t t-esc="last"></t></p>
+                                            </p> 
+                                       
+                                            <a class="btn btn-primary btn-lg pull-center mt8" t-att-href="'/signin/%s/click' %user.id">
+                                                <t t-if="signed_in">Sign out</t>
+                                                <t t-if="signed_in==False">Sign in</t> 
+                                            </a>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                        
+                                        </div>
+                                        </div> 
+                                    </section>   
+   <!--                                       <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8 text-muted">
                                                     <p class="mb0">
@@ -167,10 +192,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </section>
-                                </div>
+                                  </section>
+
+                                </div>-->
                             </div>
                         </section>
+
                     </div>
                 </t>
                 
@@ -183,8 +210,7 @@
                         someone@example.com</a>.</p>
                 </footer>
 -->
-                
-                
+
             </html>
         </template>
         

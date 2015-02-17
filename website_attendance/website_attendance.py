@@ -30,12 +30,15 @@ import pytz
 class website_hello_world(http.Controller):
         
     @http.route(['/signin/<model("res.users"):user>', '/signin/<model("res.users"):user>/<string:clicked>', '/signin'], type='http', auth="user", website=True)
-    def hello(self, user=False, clicked=False):
+    def hello(self, user=False, clicked=False, **post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
         if not user:
             return werkzeug.utils.redirect("/signin/%s" %uid,302)
         if clicked:
             user.employee_ids[0].attendance_action_change()
+        if post.get('signin_button',False): 
+            user.employee_ids[0].attendance_action_change()
+            
         last=user.employee_ids[0].last_sign
          # get user's timezone
         #user_pool = self.pool.get('res.users')
@@ -46,8 +49,8 @@ class website_hello_world(http.Controller):
     
         ctx = {
             'user' : user,
-            'signed_in': user.employee_ids[0].state == 'present',
-            'last': last,             #TODO: justera tiden till rätt tidszon
+            'signed_in': 'Sign out' if user.employee_ids[0].state == 'present' else "Sign in",
+            'last': last,             
             }
     
 

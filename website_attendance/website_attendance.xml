@@ -148,10 +148,6 @@
 
                         <section class="mb32 mt16">
                             <div class="container">
-     <!--                         <div class="row">                 
-
-                                                
-                                      <section class="jumbotron">-->
                                     
                                     <section class="oe_container oe_dark">
                                         <div class="oe_row">           
@@ -163,38 +159,18 @@
                                                 <p t-if="signed_in">Last sign in <t t-esc="last"></t></p>
                                                 <p t-if="signed_in==False">Last sign out <t t-esc="last"></t></p>
                                             </p> 
-                                       
-                                            <a class="btn btn-primary btn-lg pull-center mt8" t-att-href="'/signin/%s/click' %user.id">
-                                                <t t-if="signed_in">Sign out</t>
-                                                <t t-if="signed_in==False">Sign in</t> 
-                                            </a>
+            
+                                            <form t-att-action="'/signin/%s' %user.id" method="POST">                                          
+                                            <input name="signin_button" type="submit" class="btn btn-primary btn-lg pull-center mt8"
+                                             t-att-value="'%s' %signed_in"/>                              
+                                            </form>
                                             <br/>
                                             <br/>
                                             <br/>
                                         
                                         </div>
                                         </div> 
-                                    </section>   
-   <!--                                       <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-8 text-muted">
-                                                    <p class="mb0">
-                                                        <strong>Click to sign in and out</strong>
-                                                    </p>
-                                                    <p t-if="signed_in">Last sign in <t t-esc="last"></t></p>
-                                                    <p t-if="signed_in==False">Last sign out <t t-esc="last"></t></p>
-                                                </div>
-                                                <div>
-                                                    <a class="btn btn-primary btn-lg pull-center mt8" t-att-href="'/signin/%s/click' %user.id">
-                                                        <t t-if="signed_in">Sign out</t>
-                                                        <t t-if="signed_in==False">Sign in</t> 
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                  </section>
-
-                                </div>-->
+                                    </section>  
                             </div>
                         </section>
 
